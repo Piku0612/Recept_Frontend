@@ -8,6 +8,8 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import OwnReceipts from './pages/OwnReceipts'
 import AppNavbar from './components/AppNavbar'
+import TopList from './pages/TopList'
+import Favourites from './pages/Favourites'
 
 
 
@@ -24,6 +26,8 @@ createRoot(document.getElementById('root')).render(
         <Route path='/ownreceipts' element={<OwnReceipts />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/toplist' element={<TopList />} />
+        <Route path='/favourites' element={<Favourites />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
