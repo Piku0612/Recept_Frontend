@@ -28,6 +28,7 @@ export default function Register() {
         }
 
         try {
+            console.log(username, psw, email);
             const data = await register( username,psw, email)
             if (data.error) {
                 setHiba(data.error)

@@ -1,8 +1,15 @@
 import { NavLink,Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 export default function AppNavbar() {
     const nav = useNavigate()
+    const [search, setSearch] = useState("")
 
+  function handleSearch() {
+    if (!search.trim()) return
+
+    nav(`/home?search=${search}`)
+  }
     return (
 
              <>
@@ -24,8 +31,15 @@ export default function AppNavbar() {
                 <input
                   className="form-control"
                   placeholder="Search receipt..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
-                <button className="btn btn-warning">🔍</button>
+                <button 
+                  className="btn btn-warning"
+                  onClick={handleSearch}
+                >
+                  🔍
+                </button>
               </div>
             </div>
 

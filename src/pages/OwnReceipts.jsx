@@ -9,7 +9,7 @@ export default function OwnReceipt(){
                     <form className="d-flex gap-2"></form>
                 ) : (
                     <div className="alert alert-secondary">
-                        A feltöltéshez be kell jelentkezni!
+                        <h1>A feltöltéshez be kell jelentkezni!</h1>
                     </div>
                 )} 
             </div>
