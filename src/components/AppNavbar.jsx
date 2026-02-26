@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink,Link, useNavigate } from 'react-router-dom'
 
 export default function AppNavbar() {
     const nav = useNavigate()
@@ -14,7 +14,7 @@ export default function AppNavbar() {
             {/* Logo */}
             <div className="col-12 col-md-3 text-center text-md-start">
               <h2 className="fw-bold m-0">
-                <span className="bg-dark text-white px-2">LH</span> LessHastle
+                <span className="bg-dark text-white px-2">LH</span> LessHassle
               </h2>
             </div>
 
@@ -50,18 +50,18 @@ export default function AppNavbar() {
       {/* NAVBAR */}
       <div className="bg-black text-white py-2">
         <div className="container d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
-          <NavLink to="/home" className="text-white text-decoration-none">
+          <NavLink to="/home" className="text-white text-decoration-none my-1">
             Receipts
           </NavLink>
-          <NavLink to="/ownreceipts" className="text-white text-decoration-none">
+          <NavLink to="/ownreceipts" className="text-white text-decoration-none my-1">
             OwnReceipts
           </NavLink>
 
-          <NavLink to="/toplist" className="text-white text-decoration-none">
+          <NavLink to="/toplist" className="text-white text-decoration-none my-1">
             Toplist
           </NavLink>
 
-          <NavLink to="/favourites" className="text-white text-decoration-none">
+          <NavLink to="/favourites" className="text-white text-decoration-none my-1">
             Favourites
           </NavLink>
         </div>

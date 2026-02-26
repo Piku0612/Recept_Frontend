@@ -10,6 +10,7 @@ import OwnReceipts from './pages/OwnReceipts'
 import AppNavbar from './components/AppNavbar'
 import TopList from './pages/TopList'
 import Favourites from './pages/Favourites'
+import Footer from './components/Footer'
 
 
 
@@ -19,7 +20,11 @@ createRoot(document.getElementById('root')).render(
 
   <StrictMode>
 <BrowserRouter>
+  <div className="d-flex flex-column min-vh-100">
+    
     <AppNavbar />
+
+    <main className="flex-fill">
       <Routes>
         <Route path='/' element={<Navigate to='/home' />} />
         <Route path='/home' element={<Home />} />
@@ -29,7 +34,12 @@ createRoot(document.getElementById('root')).render(
         <Route path='/toplist' element={<TopList />} />
         <Route path='/favourites' element={<Favourites />} />
       </Routes>
-    </BrowserRouter>
+    </main>
+
+    <Footer />
+
+  </div>
+</BrowserRouter>
   </StrictMode>
   
 )
