@@ -16,6 +16,7 @@ export default function Login() {
     async function onLogin() {
         setHiba('')
         setUzenet('')
+        
 
         if (!email || !psw) {
             return setHiba('Minden mezőt tölts ki!')
@@ -45,8 +46,11 @@ export default function Login() {
                     <Input label="Jelszo" type='password' value={psw} setValue={setPsw} placeholder='********' />
 
                     <div className="text-center">
-                        <Button szin='btn btn-dark px-4' text='Login' />
+                        <Button szin='btn btn-dark px-4' onClick={onLogin} text='Login' />
                     </div>
+
+                    {hiba && <div className="alert alert-danger text-center my-2">{hiba}</div>}
+                    {uzenet && <div className="alert alert-success text-center my-2">{uzenet}</div>}
 
 
                     <div className="text-center">
