@@ -1,11 +1,17 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Button from "../components/Button";
 import { register } from "../api";
 import Input from "../components/Input";
+import AppNavbar from "../components/AppNavbar";
+import { whoAmI } from "../api";
+
 
 export default function Register() {
+    const [user, setUser] = useState(null)
+
+    const navigate=useNavigate()
 
     const [email, setEmail]=useState('')
     const [username, setUsername]=useState('')
@@ -14,6 +20,21 @@ export default function Register() {
 
     const [hiba, setHiba]= useState('')
     const [uzenet, setUzenet]=useState('')
+
+    const [errorUser, setErrorUser] = useState('')
+
+    //WhoAmi
+  useEffect(() => {
+    async function load() {
+      const data = await whoAmI()
+      //console.log(data);
+      if (data.error) {
+        return setErrorUser(data.error)
+
+      }
+      return setUser(data)
+    }
+    load()}, [])
 
     async function onReg(){
         setHiba('')
@@ -34,6 +55,7 @@ export default function Register() {
                 setHiba(data.error)
             }
             setUzenet(data.message)
+            navigate('/login')
         } catch (err) {
             setHiba(err.data)
 
@@ -42,6 +64,7 @@ export default function Register() {
 
     return (
         <>
+        <AppNavbar user={user}/>
 
 
             <div className="container d-flex vh-100 flex-column" style={{marginTop:130} }>

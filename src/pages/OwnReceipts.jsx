@@ -1,8 +1,42 @@
+import AppNavbar from "../components/AppNavbar"
+import { useState } from "react"
+import { whoAmI } from "../api"
+import { useEffect } from "react"
+import { Logout } from "../api"
 
 
 export default function OwnReceipt(){
+   
+    const [user, setUser] = useState(null)
+    const [errorUser, setErrorUser] = useState('')
+
+    //WhoAmi
+  useEffect(() => {
+    async function load() {
+      const data = await whoAmI()
+      //console.log(data);
+      if (data.error) {
+        return setErrorUser(data.error)
+
+      }
+      return setUser(data)
+    }
+    load()}, [])
+
+    async function onLogout(){
+        const data=await Logout()
+        if (data.error) {
+            return setErrorUser(data.error)
+        }
+        setUser(null)
+        navigate('/')
+    
+    }
+
     const token= localStorage.getItem('token')
-    return(
+    return( 
+        <>
+         <AppNavbar user={user} onLogout={onLogout}/>
         <div className="container py-4">
             <div className="mb-3">
                 {token ? (
@@ -14,5 +48,7 @@ export default function OwnReceipt(){
                 )} 
             </div>
         </div>
+        </>
+   
     )
 }

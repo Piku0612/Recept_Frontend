@@ -19,27 +19,24 @@ import Home from './pages/Home' // Home.jsx import
 createRoot(document.getElementById('root')).render(
 
   <StrictMode>
-<BrowserRouter>
-  <div className="d-flex flex-column min-vh-100">
-    
-    <AppNavbar />
+    <BrowserRouter>
+      <div className="d-flex flex-column min-vh-100">
+        <main className="flex-fill">
+          <Routes>
+            <Route path='/' element={<Navigate to='/home' />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/ownreceipts' element={<OwnReceipts />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/toplist' element={<TopList />} />
+            <Route path='/favourites' element={<Favourites />} />
+          </Routes>
+        </main>
 
-    <main className="flex-fill">
-      <Routes>
-        <Route path='/' element={<Navigate to='/home' />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/ownreceipts' element={<OwnReceipts />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/toplist' element={<TopList />} />
-        <Route path='/favourites' element={<Favourites />} />
-      </Routes>
-    </main>
+        <Footer />
 
-    <Footer />
-
-  </div>
-</BrowserRouter>
+      </div>
+    </BrowserRouter>
   </StrictMode>
-  
+
 )
