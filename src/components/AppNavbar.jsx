@@ -1,18 +1,24 @@
-import { NavLink,Link, useNavigate } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
-export default function AppNavbar() {
-    const nav = useNavigate()
-    const [search, setSearch] = useState("")
+export default function AppNavbar({ user, onLogout }) {
+
+  const isLoggedIn = !!user
+  //console.log(isLoggedIn)
+  const isAdmin = user?.role === "admin"
+
+
+  const nav = useNavigate()
+  const [search, setSearch] = useState("")
 
   function handleSearch() {
     if (!search.trim()) return
 
     nav(`/home?search=${search}`)
   }
-    return (
+  return (
 
-             <>
+    <>
       {/* HEADER */}
       <div className="bg-white border-bottom py-3">
         <div className="container">
@@ -34,7 +40,7 @@ export default function AppNavbar() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                <button 
+                <button
                   className="btn btn-warning"
                   onClick={handleSearch}
                 >
@@ -43,19 +49,43 @@ export default function AppNavbar() {
               </div>
             </div>
 
-            {/* Register */}
-            <div className="col-12 col-md-1 text-center text-md-end">
-              <NavLink to="/register" className="btn btn-outline-dark">
-                Register
-              </NavLink>
-            </div>
+            {isLoggedIn ? (
+              <>
+                {/* Admin oldal */}
+                <div className="col-12 col-md-1 text-center text-md-end">
+                  {isAdmin && <NavLink to='/admin' className="btn btn-outline-dark">
+                    Admin
+                  </NavLink>}
+                </div>
 
-            {/* Login */}
-            <div className="col-12 col-md-2 text-center text-md-end">
-              <NavLink to="/login" className="btn btn-outline-dark">
-                Login
-              </NavLink>
-            </div>
+                {/* Logout */}
+                <div className="col-12 col-md-1 text-center text-md-end">
+                  {isLoggedIn && <NavLink onClick={onLogout} className="btn btn-outline-dark">
+                    Logout
+                  </NavLink>
+
+                  }
+                </div>
+
+              </>
+            ) : (
+              <>
+                {/* Register */}
+                <div className="col-12 col-md-1 text-center text-md-end">
+                  <NavLink to="/register" className="btn btn-outline-dark">
+                    Register
+                  </NavLink>
+                </div>
+
+                {/* Login */}
+                <div className="col-12 col-md-1 text-center text-md-end">
+                  <NavLink to="/login" className="btn btn-outline-dark">
+                    Login
+                  </NavLink>
+                </div>
+              </>
+            )}
+
 
           </div>
         </div>
@@ -81,8 +111,8 @@ export default function AppNavbar() {
         </div>
       </div>
 
-     
+
     </>
 
-    )
+  )
 }

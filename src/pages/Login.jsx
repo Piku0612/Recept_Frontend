@@ -3,9 +3,32 @@ import Button from "../components/Button";
 import { login } from "../api";
 import Input from "../components/Input";
 import { useState } from "react";
+import AppNavbar from "../components/AppNavbar";
+import { whoAmI } from "../api";
+import { useEffect } from "react";
 
 
 export default function Login() {
+    const [user, setUser] = useState(null)
+    const [errorUser, setErrorUser] = useState('')
+
+    //WhoAmi
+  useEffect(() => {
+    async function load() {
+      const data = await whoAmI()
+      //console.log(data);
+      if (data.error) {
+        return setErrorUser(data.error)
+
+      }
+      return setUser(data)
+    }
+    load()}, [])
+
+    
+    
+
+    const navigate=useNavigate()
 
     const [email, setEmail] = useState('')
     const [psw, setPsw] = useState('')
@@ -27,8 +50,10 @@ export default function Login() {
             const data = await login(email, psw)
             if (data.error) {
                 setHiba(data.error)
+                
             }
             setUzenet(data.message)
+            navigate('/')
         } catch (err) {
             setHiba("Nem sikerult a backendhez kapcsolodni")
 
@@ -37,8 +62,10 @@ export default function Login() {
 
 
     return (
+        
 
         <>
+        <AppNavbar user={user}/>
             <div className="container d-flex vh-100 flex-column  " style={{marginTop:130} }>
                 <div className="p-4 border border-secondary rounded" >
 
