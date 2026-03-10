@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams, useNavigate } from "react-router-dom"
 import { whoAmI, Logout } from "../api"
-import { useNavigate } from "react-router-dom"
 import AppNavbar from "../components/AppNavbar"
-
+import RecipeCard from "../components/RecipeCard"
 
 export default function Home() {
+
   const navigate = useNavigate()
+
   const [user, setUser] = useState(null)
-  const [errorUser, setErrorUser] = useState('')
-
+  const [errorUser, setErrorUser] = useState("")
   const [recipes, setRecipes] = useState([])
-  const [filteredRecipes, setFilteredRecipes] = useState([])
-  const [searchParams] = useSearchParams()
 
+  const [searchParams] = useSearchParams()
   const search = searchParams.get("search")
 
+  // receptek betöltése
   useEffect(() => {
 
     async function fetchRecipes() {
@@ -32,50 +32,62 @@ export default function Home() {
 
   }, [search])
 
-  //WhoAmi
+  // WhoAmI
   useEffect(() => {
+
     async function load() {
       const data = await whoAmI()
-      //console.log(data);
+
       if (data.error) {
         return setErrorUser(data.error)
-
       }
-      return setUser(data)
+
+      setUser(data)
     }
+
     load()
+
   }, [])
 
-  async function onLogout(){
-    const data=await Logout()
+  async function onLogout() {
+
+    const data = await Logout()
+
     if (data.error) {
-        return setErrorUser(data.error)
+      return setErrorUser(data.error)
     }
+
     setUser(null)
-    navigate('/')
+    navigate("/")
 
-}
-
-
+  }
 
   return (
     <div>
-      <AppNavbar user={user} onLogout={onLogout}  />
-      {errorUser && <div className="alert alert-danger text-center my-2">{errorUser}</div>}
+
+      <AppNavbar user={user} onLogout={onLogout} />
+
+      {errorUser && (
+        <div className="alert alert-danger text-center my-2">
+          {errorUser}
+        </div>
+      )}
+
       <div className="container mt-4">
 
-      {recipes.map(r => (
-        <div key={r.id} className="border p-3 mb-3">
-          <h5>{r.title}</h5>
-          <p>{r.description}</p>
+        <div className="row">
+
+          {recipes.length === 0 && (
+            <p className="text-center">No recipes found.</p>
+          )}
+
+          {recipes.map((r) => (
+            <RecipeCard key={r.id} recipe={r} />
+          ))}
+
         </div>
-      ))}
-    </div>
 
-    
-
-      
-
+      </div>
 
     </div>
   )

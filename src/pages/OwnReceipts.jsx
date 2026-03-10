@@ -1,12 +1,12 @@
 import AppNavbar from "../components/AppNavbar"
-import { useState } from "react"
-import { whoAmI } from "../api"
-import { useEffect } from "react"
-import { Logout } from "../api"
+import { useState, useEffect } from "react"
+import { whoAmI, Logout } from "../api"
+import { useNavigate } from "react-router-dom"
+
 
 
 export default function OwnReceipt(){
-   
+    const navigate = useNavigate()
     const [user, setUser] = useState(null)
     const [errorUser, setErrorUser] = useState('')
 
@@ -33,13 +33,12 @@ export default function OwnReceipt(){
     
     }
 
-    const token= localStorage.getItem('token')
     return( 
         <>
          <AppNavbar user={user} onLogout={onLogout}/>
         <div className="container py-4">
             <div className="mb-3">
-                {token ? (
+                {user ? (
                     <form className="d-flex gap-2"></form>
                 ) : (
                     <div className="alert alert-secondary">
