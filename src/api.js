@@ -1,4 +1,5 @@
 const BACKEND_URL = '/users'
+const BACKEND_URL_RECIPE = '/recipe'
 
 //Regisztráció
 export async function register(username, password, email) {
@@ -64,6 +65,21 @@ export async function Logout(){
     })
 
     console.log(res);
+    if (!res.ok) {
+        const data=await res.json()
+        return{error:data?.error}
+    }
+
+    return await res.json()
+}
+
+export async function List(){
+    const res=await fetch(`${BACKEND_URL_RECIPE}/list`,{
+        method:'GET',
+        credentials:'include'
+    })
+
+    //console.log(res);
     if (!res.ok) {
         const data=await res.json()
         return{error:data?.error}
