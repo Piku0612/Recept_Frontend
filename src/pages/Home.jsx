@@ -11,7 +11,7 @@ export default function Home() {
   const [user, setUser] = useState(null)
   const [errorUser, setErrorUser] = useState("")
   const [recipes, setRecipes] = useState([])
-
+  console.log(recipes);
   const [searchParams] = useSearchParams()
   const search = searchParams.get("search")
 
@@ -21,10 +21,11 @@ export default function Home() {
     async function fetchRecipes() {
 
       const res = await fetch(
-        `http://127.0.0.1:4000/recipes?search=${search || ""}`
+        `http://127.0.0.1:4000/recipe/list`
       )
-
+      //console.log(res);
       const data = await res.json()
+      //console.log(data);
       setRecipes(data)
     }
 
