@@ -10,6 +10,7 @@ import OwnReceipts from './pages/OwnReceipts'
 import AppNavbar from './components/AppNavbar'
 import TopList from './pages/TopList'
 import Favourites from './pages/Favourites'
+import Footer from './components/Footer'
 
 
 
@@ -18,18 +19,24 @@ import Home from './pages/Home' // Home.jsx import
 createRoot(document.getElementById('root')).render(
 
   <StrictMode>
-<BrowserRouter>
-    <AppNavbar />
-      <Routes>
-        <Route path='/' element={<Navigate to='/home' />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/ownreceipts' element={<OwnReceipts />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/toplist' element={<TopList />} />
-        <Route path='/favourites' element={<Favourites />} />
-      </Routes>
+    <BrowserRouter>
+      <div className="d-flex flex-column min-vh-100">
+        <main className="flex-fill">
+          <Routes>
+            <Route path='/' element={<Navigate to='/home' />} />
+            <Route path='/home' element={<Home />} />
+            <Route path='/ownreceipts' element={<OwnReceipts />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/toplist' element={<TopList />} />
+            <Route path='/favourites' element={<Favourites />} />
+          </Routes>
+        </main>
+
+        <Footer />
+
+      </div>
     </BrowserRouter>
   </StrictMode>
-  
+
 )

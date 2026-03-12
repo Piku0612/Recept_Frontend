@@ -1,11 +1,24 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
-export default function AppNavbar() {
-    const nav = useNavigate()
+export default function AppNavbar({ user, onLogout }) {
 
-    return (
+  const isLoggedIn = !!user
+  //console.log(isLoggedIn)
+  const isAdmin = user?.role === "admin"
 
-             <>
+
+  const nav = useNavigate()
+  const [search, setSearch] = useState("")
+
+  function handleSearch() {
+    if (!search.trim()) return
+
+    nav(`/home?search=${search}`)
+  }
+  return (
+
+    <>
       {/* HEADER */}
       <div className="bg-white border-bottom py-3">
         <div className="container">
@@ -14,7 +27,7 @@ export default function AppNavbar() {
             {/* Logo */}
             <div className="col-12 col-md-3 text-center text-md-start">
               <h2 className="fw-bold m-0">
-                <span className="bg-dark text-white px-2">LH</span> LessHastle
+                <span className="bg-dark text-white px-2">LH</span> LessHassle
               </h2>
             </div>
 
@@ -24,24 +37,55 @@ export default function AppNavbar() {
                 <input
                   className="form-control"
                   placeholder="Search receipt..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
-                <button className="btn btn-warning">🔍</button>
+                <button
+                  className="btn btn-warning"
+                  onClick={handleSearch}
+                >
+                  🔍
+                </button>
               </div>
             </div>
 
-            {/* Register */}
-            <div className="col-12 col-md-1 text-center text-md-end">
-              <NavLink to="/register" className="btn btn-outline-dark">
-                Register
-              </NavLink>
-            </div>
+            {isLoggedIn ? (
+              <>
+                {/* Admin oldal */}
+                <div className="col-12 col-md-1 text-center text-md-end">
+                  {isAdmin && <NavLink to='/admin' className="btn btn-outline-dark">
+                    Admin
+                  </NavLink>}
+                </div>
 
-            {/* Login */}
-            <div className="col-12 col-md-2 text-center text-md-end">
-              <NavLink to="/login" className="btn btn-outline-dark">
-                Login
-              </NavLink>
-            </div>
+                {/* Logout */}
+                <div className="col-12 col-md-1 text-center text-md-end">
+                  {isLoggedIn && <NavLink onClick={onLogout} className="btn btn-outline-dark">
+                    Logout
+                  </NavLink>
+
+                  }
+                </div>
+
+              </>
+            ) : (
+              <>
+                {/* Register */}
+                <div className="col-12 col-md-1 text-center text-md-end">
+                  <NavLink to="/register" className="btn btn-outline-dark">
+                    Register
+                  </NavLink>
+                </div>
+
+                {/* Login */}
+                <div className="col-12 col-md-1 text-center text-md-end">
+                  <NavLink to="/login" className="btn btn-outline-dark">
+                    Login
+                  </NavLink>
+                </div>
+              </>
+            )}
+
 
           </div>
         </div>
@@ -50,25 +94,25 @@ export default function AppNavbar() {
       {/* NAVBAR */}
       <div className="bg-black text-white py-2">
         <div className="container d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
-          <NavLink to="/home" className="text-white text-decoration-none">
+          <NavLink to="/home" className="text-white text-decoration-none my-1">
             Receipts
           </NavLink>
-          <NavLink to="/ownreceipts" className="text-white text-decoration-none">
+          <NavLink to="/ownreceipts" className="text-white text-decoration-none my-1">
             OwnReceipts
           </NavLink>
 
-          <NavLink to="/toplist" className="text-white text-decoration-none">
+          <NavLink to="/toplist" className="text-white text-decoration-none my-1">
             Toplist
           </NavLink>
 
-          <NavLink to="/favourites" className="text-white text-decoration-none">
+          <NavLink to="/favourites" className="text-white text-decoration-none my-1">
             Favourites
           </NavLink>
         </div>
       </div>
 
-     
+
     </>
 
-    )
+  )
 }
