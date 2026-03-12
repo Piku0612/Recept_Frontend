@@ -15,7 +15,7 @@ export default function Home() {
   const [searchParams] = useSearchParams()
   const search = searchParams.get("search")
 
-  // receptek betöltése
+  // receptek betöltése 
   useEffect(() => {
 
     async function fetchRecipes() {
