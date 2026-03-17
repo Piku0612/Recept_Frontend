@@ -11,10 +11,12 @@ import AppNavbar from './components/AppNavbar'
 import TopList from './pages/TopList'
 import Favourites from './pages/Favourites'
 import Footer from './components/Footer'
+import AddRecipe from './pages/AddRecipe'
 
 
 
 import Home from './pages/Home' // Home.jsx import
+
 
 createRoot(document.getElementById('root')).render(
 
@@ -30,6 +32,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/login' element={<Login />} />
             <Route path='/toplist' element={<TopList />} />
             <Route path='/favourites' element={<Favourites />} />
+            <Route path='/add-recipe' element={<AddRecipe/>}/>
           </Routes>
         </main>
 
