@@ -2,8 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { List } from "../api";
 
-export default function RecipeCard({ recipe }) {
+const BACKEND_URL = 'http://192.168.10.110:4000'
 
+export default function RecipeCard({ recipe }) {
+  console.log(recipe);
   const navigate = useNavigate();
 
   function openRecipe() {
@@ -16,7 +18,7 @@ export default function RecipeCard({ recipe }) {
       <div className="card h-100 shadow-sm">
 
         <img
-          src={recipe.image || "https://via.placeholder.com/400x200"}
+          src={`${BACKEND_URL}${recipe.image_url}` || "https://via.placeholder.com/400x200"}
           className="card-img-top"
           alt={recipe.title}
           style={{ height: "200px", objectFit: "cover" }}

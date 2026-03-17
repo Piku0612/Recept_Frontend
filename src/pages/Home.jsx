@@ -21,7 +21,7 @@ export default function Home() {
     async function fetchRecipes() {
 
       const res = await fetch(
-        'http://127.0.0.1:4000/recipe/list'
+        'http://192.168.10.110:4000/recipe/list'
       )
       //console.log(res);
       const data = await res.json()
