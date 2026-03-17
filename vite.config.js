@@ -10,12 +10,16 @@ export default defineConfig({
       },
     }),
   ],
-  server:{
-    proxy:{
-      '/users':{
-        target:'http://192.168.10.110:4000',
-        changeOrigin:true
+  server: {
+    proxy: {
+      '/users': {
+        target: 'http://192.168.10.110:4000',
+        changeOrigin: true
       }
+    },
+    '/recipe': {
+      target: 'http://192.168.10.110:4000',
+      changeOrigin: true
     }
-   }
+  }
 })
