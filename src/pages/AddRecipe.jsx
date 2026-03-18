@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AppNavbar from "../components/AppNavbar";
-import { Logout,whoAmI  } from "../api";
+import { Logout, whoAmI } from "../api";
 
 export default function AddRecipe() {
 
-    const [user, setUser] = useState(null)
-    const [errorUser, setErrorUser] = useState('')
+  const [user, setUser] = useState(null)
+  const [errorUser, setErrorUser] = useState('')
 
-    //WhoAmi
+  //WhoAmi
   useEffect(() => {
     async function load() {
       const data = await whoAmI()
@@ -18,20 +18,20 @@ export default function AddRecipe() {
 
       }
 
-      
+
       return setUser(data)
     }
     load()
   }, [])
 
-  async function onLogout(){
-    const data=await Logout()
+  async function onLogout() {
+    const data = await Logout()
     if (data.error) {
-        return setErrorUser(data.error)
+      return setErrorUser(data.error)
     }
     setUser(null)
     navigate('/')
-}
+  }
 
   const navigate = useNavigate();
 
@@ -55,10 +55,10 @@ export default function AddRecipe() {
     }
 
     try {
-      const res = await fetch("http://192.168.10.110:4000/recipe/add", {
+      const res = await fetch("/recipe/add", {
         method: "POST",
-        credentials: "include",
-        body: formData
+        body: formData,
+        credentials: "include"
       });
 
       const data = await res.json();
@@ -70,7 +70,7 @@ export default function AddRecipe() {
       setSuccess("Recipe added successfully!");
 
       setTimeout(() => {
-        navigate("/own-recipes");
+        navigate("/ownreceipts");
       }, 1000);
 
     } catch (err) {
@@ -80,13 +80,13 @@ export default function AddRecipe() {
 
   return (
 
-    
+
     <div>
-        <div>
-            <AppNavbar user={user} onLogout={onLogout}  />
-      {errorUser && <div className="alert alert-danger text-center my-2">{errorUser}</div>}
-      <div className="container mt-4"></div>
-        </div>
+      <div>
+        <AppNavbar user={user} onLogout={onLogout} />
+        {errorUser && <div className="alert alert-danger text-center my-2">{errorUser}</div>}
+        <div className="container mt-4"></div>
+      </div>
 
 
       <div className="container mt-4">

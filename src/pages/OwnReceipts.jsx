@@ -38,17 +38,7 @@ export default function OwnReceipt() {
     return (
         <>
             <AppNavbar user={user} onLogout={onLogout} />
-            <div className="container py-4">
-                <div className="mb-3">
-                    {user ? (
-                        <form className="d-flex gap-2"></form>
-                    ) : (
-                        <div className="alert alert-secondary">
-                            <h1>A feltöltéshez be kell jelentkezni!</h1>
-                        </div>
-                    )}
-                </div>
-            </div>
+            
 
             <div className="container mt-4">
 

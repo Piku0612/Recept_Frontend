@@ -15,11 +15,11 @@ export default defineConfig({
       '/users': {
         target: 'http://192.168.10.110:4000',
         changeOrigin: true
+      },
+      '/recipe': {
+        target: 'http://192.168.10.110:4000',
+        changeOrigin: true
       }
-    },
-    '/recipe': {
-      target: 'http://192.168.10.110:4000',
-      changeOrigin: true
     }
   }
 })
