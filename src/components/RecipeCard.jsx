@@ -16,19 +16,7 @@ export default function RecipeCard({ recipe, isFavourite, onToggleFavourite }) {
 
   return (
     <div className="col-md-4 mb-4">
-      <div className="card h-100 shadow-sm position-relative">
-        
-        <button
-          type="button"
-          onClick={() => onToggleFavourite(recipe.recipe_id)}
-          className="btn position-absolute top-0 end-0 m-2 p-1 border-0 bg-transparent"
-          style={{ fontSize: "1.8rem", zIndex: 2 }}
-        >
-          <span style={{ color: isFavourite ? "red" : "#ccc" }}>
-            ♥
-          </span>
-        </button>
-
+      <div className="card h-100 shadow-sm">
         <img
           src={imageSrc}
           className="card-img-top"
@@ -37,9 +25,28 @@ export default function RecipeCard({ recipe, isFavourite, onToggleFavourite }) {
         />
 
         <div className="card-body d-flex flex-column">
-          <h5 className="card-title">{recipe.title}</h5>
+          <div className="d-flex align-items-center justify-content-between">
+            <h5 className="card-title mb-0">{recipe.title}</h5>
 
-          <p className="card-text">
+            <button
+              type="button"
+              onClick={() => onToggleFavourite(recipe.recipe_id)}
+              className="btn p-0 border-0 bg-transparent"
+              style={{ fontSize: "1.5rem" }}
+            >
+              <span
+                style={{
+                  color: isFavourite ? "red" : "#ccc",
+                  transition: "0.2s",
+                  cursor: "pointer",
+                }}
+              >
+                ♥
+              </span>
+            </button>
+          </div>
+
+          <p className="card-text mt-2">
             {recipe.description?.slice(0, 120)}...
           </p>
 
@@ -47,10 +54,7 @@ export default function RecipeCard({ recipe, isFavourite, onToggleFavourite }) {
             <strong>Ingredients:</strong> {recipe.ingredients}
           </p>
 
-          <button
-            className="btn btn-warning mt-auto"
-            onClick={openRecipe}
-          >
+          <button className="btn btn-warning mt-auto" onClick={openRecipe}>
             View Recipe
           </button>
         </div>
