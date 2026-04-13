@@ -15,6 +15,10 @@ export default function Home() {
   const [searchParams] = useSearchParams();
   const search = searchParams.get("search");
 
+  function isSameRecipeId(firstId, secondId) {
+    return String(firstId) === String(secondId);
+  }
+
   useEffect(() => {
     async function fetchRecipes() {
       const res = await fetch("http://192.168.10.110:4000/recipe/list");
@@ -61,7 +65,7 @@ export default function Home() {
       return;
     }
 
-    const isFav = favourites.some((fav) => fav.recipe_id === recipeId);
+    const isFav = favourites.some((fav) => isSameRecipeId(fav.recipe_id, recipeId));
 
     if (isFav) {
       const data = await removeFavourite(recipeId);
@@ -70,7 +74,9 @@ export default function Home() {
         return;
       }
 
-      setFavourites((prev) => prev.filter((fav) => fav.recipe_id !== recipeId));
+      setFavourites((prev) =>
+        prev.filter((fav) => !isSameRecipeId(fav.recipe_id, recipeId))
+      );
     } else {
       const data = await addFavourite(recipeId);
       if (data.error) {
@@ -78,9 +84,13 @@ export default function Home() {
         return;
       }
 
-      const recipeToAdd = recipes.find((r) => r.recipe_id === recipeId);
+      const recipeToAdd = recipes.find((r) => isSameRecipeId(r.recipe_id, recipeId));
       if (recipeToAdd) {
-        setFavourites((prev) => [...prev, recipeToAdd]);
+        setFavourites((prev) =>
+          prev.some((fav) => isSameRecipeId(fav.recipe_id, recipeId))
+            ? prev
+            : [...prev, recipeToAdd]
+        );
       }
     }
   }
@@ -105,7 +115,7 @@ export default function Home() {
             <RecipeCard
               key={r.recipe_id}
               recipe={r}
-              isFavourite={favourites.some((fav) => fav.recipe_id === r.recipe_id)}
+              isFavourite={favourites.some((fav) => isSameRecipeId(fav.recipe_id, r.recipe_id))}
               onToggleFavourite={handleToggleFavourite}
             />
           ))}
