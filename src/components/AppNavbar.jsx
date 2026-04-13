@@ -1,11 +1,12 @@
-import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 export default function AppNavbar({ user, onLogout }) {
 
   const isLoggedIn = !!user
   //console.log(isLoggedIn)
-  const isAdmin = user?.role === "admin"
+  const normalizedRole = String(user?.role ?? "").toLowerCase()
+  const isAdmin = normalizedRole === "admin" || normalizedRole === "1"
 
 
   const nav = useNavigate()

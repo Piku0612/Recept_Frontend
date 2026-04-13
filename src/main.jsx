@@ -7,11 +7,11 @@ import { Routes, Route, Navigate } from 'react-router-dom' //react routerhez
 import Register from './pages/Register'
 import Login from './pages/Login'
 import OwnReceipts from './pages/OwnReceipts'
-import AppNavbar from './components/AppNavbar'
 import TopList from './pages/TopList'
 import Favourites from './pages/Favourites'
 import Footer from './components/Footer'
 import AddRecipe from './pages/AddRecipe'
+import Admin from './pages/Admin'
 
 
 
@@ -33,6 +33,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/toplist' element={<TopList />} />
             <Route path='/favourites' element={<Favourites />} />
             <Route path='/add-recipe' element={<AddRecipe/>}/>
+            <Route path='/admin' element={<Admin/>}/>
           </Routes>
         </main>
 
