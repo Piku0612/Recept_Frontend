@@ -11,6 +11,10 @@ export default function Favourites() {
 
   const navigate = useNavigate();
 
+  function isSameRecipeId(firstId, secondId) {
+    return String(firstId) === String(secondId);
+  }
+
   useEffect(() => {
     async function load() {
       const data = await whoAmI();
@@ -51,7 +55,9 @@ export default function Favourites() {
       return;
     }
 
-    setFavourites((prev) => prev.filter((fav) => fav.recipe_id !== recipeId));
+    setFavourites((prev) =>
+      prev.filter((fav) => !isSameRecipeId(fav.recipe_id, recipeId))
+    );
   }
 
   return (
