@@ -57,7 +57,18 @@ export default function RecipeCard({ recipe, isFavourite, onToggleFavourite }) {
             </button>
           </div>
 
+<<<<<<< HEAD
           <p className="card-text mt-2">{recipe.description?.slice(0, 120)}...</p>
+=======
+          <div className="mt-1 text-muted small d-flex align-items-center">
+            <span style={{ color: "red", marginRight: "5px" }}>♥</span>
+            <span>{recipe.szivekSzama || 0}</span>
+          </div>
+
+          <p className="card-text mt-2">
+            {recipe.description?.slice(0, 120)}...
+          </p>
+>>>>>>> 2cce4a4 (new version)
 
           <p className="text-muted small">
             <strong>Ingredients:</strong> {recipe.ingredients}

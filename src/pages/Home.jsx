@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { whoAmI, Logout, listFavourites, addFavourite, removeFavourite } from "../api";
+import {
+  whoAmI,
+  Logout,
+  listFavourites,
+  addFavourite,
+  removeFavourite,
+  List,
+  searchRecipes
+} from "../api";
 import AppNavbar from "../components/AppNavbar";
 import RecipeCard from "../components/RecipeCard";
 
@@ -21,8 +29,15 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchRecipes() {
-      const res = await fetch("http://192.168.10.110:4000/recipe/list");
-      const data = await res.json();
+      const data = search?.trim()
+        ? await searchRecipes(search)
+        : await List();
+
+      if (data.error) {
+        setRecipes([]);
+        return;
+      }
+
       setRecipes(data);
     }
 
@@ -65,10 +80,17 @@ export default function Home() {
       return;
     }
 
+<<<<<<< HEAD
     const isFav = favourites.some((fav) => isSameRecipeId(fav.recipe_id, recipeId));
+=======
+    const isFav = favourites.some((fav) =>
+      isSameRecipeId(fav.recipe_id, recipeId)
+    );
+>>>>>>> 2cce4a4 (new version)
 
     if (isFav) {
       const data = await removeFavourite(recipeId);
+
       if (data.error) {
         alert(data.error);
         return;
@@ -77,14 +99,36 @@ export default function Home() {
       setFavourites((prev) =>
         prev.filter((fav) => !isSameRecipeId(fav.recipe_id, recipeId))
       );
+<<<<<<< HEAD
+=======
+
+      setRecipes((prev) =>
+        prev.map((recipe) =>
+          isSameRecipeId(recipe.recipe_id, recipeId)
+            ? {
+                ...recipe,
+                szivekSzama: Math.max(0, Number(recipe.szivekSzama || 0) - 1),
+              }
+            : recipe
+        )
+      );
+>>>>>>> 2cce4a4 (new version)
     } else {
       const data = await addFavourite(recipeId);
+
       if (data.error) {
         alert(data.error);
         return;
       }
 
+<<<<<<< HEAD
       const recipeToAdd = recipes.find((r) => isSameRecipeId(r.recipe_id, recipeId));
+=======
+      const recipeToAdd = recipes.find((r) =>
+        isSameRecipeId(r.recipe_id, recipeId)
+      );
+
+>>>>>>> 2cce4a4 (new version)
       if (recipeToAdd) {
         setFavourites((prev) =>
           prev.some((fav) => isSameRecipeId(fav.recipe_id, recipeId))
@@ -92,6 +136,17 @@ export default function Home() {
             : [...prev, recipeToAdd]
         );
       }
+
+      setRecipes((prev) =>
+        prev.map((recipe) =>
+          isSameRecipeId(recipe.recipe_id, recipeId)
+            ? {
+                ...recipe,
+                szivekSzama: Number(recipe.szivekSzama || 0) + 1,
+              }
+            : recipe
+        )
+      );
     }
   }
 
@@ -107,9 +162,21 @@ export default function Home() {
 
       <div className="container mt-4">
         <div className="row">
-          {recipes.length === 0 && (
+          {recipes.length === 0 ? (
             <p className="text-center">No recipes found.</p>
+          ) : (
+            recipes.map((r) => (
+              <RecipeCard
+                key={r.recipe_id}
+                recipe={r}
+                isFavourite={favourites.some((fav) =>
+                  isSameRecipeId(fav.recipe_id, r.recipe_id)
+                )}
+                onToggleFavourite={handleToggleFavourite}
+              />
+            ))
           )}
+<<<<<<< HEAD
 
           {recipes.map((r) => (
             <RecipeCard
@@ -119,6 +186,8 @@ export default function Home() {
               onToggleFavourite={handleToggleFavourite}
             />
           ))}
+=======
+>>>>>>> 2cce4a4 (new version)
         </div>
       </div>
     </div>

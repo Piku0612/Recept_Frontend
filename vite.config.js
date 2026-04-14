@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react({
@@ -17,6 +16,10 @@ export default defineConfig({
         changeOrigin: true
       },
       '/recipe': {
+        target: 'http://192.168.10.110:4000',
+        changeOrigin: true
+      },
+      '/fav': {
         target: 'http://192.168.10.110:4000',
         changeOrigin: true
       }
