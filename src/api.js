@@ -147,7 +147,7 @@ export async function removeFavourite(recipeId) {
     return { error: data?.error }
   }
 
-<<<<<<< HEAD
+
     return await res.json()
 }
 
@@ -296,9 +296,9 @@ export async function deleteAdminEmail(emailId) {
         ])
     )
 }
-=======
+
   return await res.json()
-}
+
 
 // Összes user lekérése adminnak
 export async function getAllUsers() {
@@ -348,4 +348,4 @@ export async function deleteUser(user_id) {
 
   return await res.json()
 }
->>>>>>> 2cce4a4 (new version)
+
