@@ -121,7 +121,7 @@ export default function AddRecipe() {
           <div className="mb-3">
             <label className="form-label">Ingredients</label>
             <textarea
-              className="form-control" 
+              className="form-control"
               value={ingredients}
               onChange={(e) => setIngredients(e.target.value)}
               required

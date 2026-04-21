@@ -80,12 +80,9 @@ export default function Home() {
       return;
     }
 
-
-
     const isFav = favourites.some((fav) =>
       isSameRecipeId(fav.recipe_id, recipeId)
     );
-
 
     if (isFav) {
       const data = await removeFavourite(recipeId);
@@ -99,8 +96,6 @@ export default function Home() {
         prev.filter((fav) => !isSameRecipeId(fav.recipe_id, recipeId))
       );
 
-
-
       setRecipes((prev) =>
         prev.map((recipe) =>
           isSameRecipeId(recipe.recipe_id, recipeId)
@@ -111,7 +106,6 @@ export default function Home() {
             : recipe
         )
       );
-
     } else {
       const data = await addFavourite(recipeId);
 
@@ -120,12 +114,9 @@ export default function Home() {
         return;
       }
 
-
-
       const recipeToAdd = recipes.find((r) =>
         isSameRecipeId(r.recipe_id, recipeId)
       );
-
 
       if (recipeToAdd) {
         setFavourites((prev) =>
@@ -174,17 +165,6 @@ export default function Home() {
               />
             ))
           )}
-
-
-          {recipes.map((r) => (
-            <RecipeCard
-              key={r.recipe_id}
-              recipe={r}
-              isFavourite={favourites.some((fav) => isSameRecipeId(fav.recipe_id, r.recipe_id))}
-              onToggleFavourite={handleToggleFavourite}
-            />
-          ))}
-
         </div>
       </div>
     </div>
