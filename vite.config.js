@@ -12,15 +12,15 @@ export default defineConfig({
   server: {
     proxy: {
       '/users': {
-        target: 'http://192.168.10.110:4000',
+        target: 'https://nodejs305.dszcbaross.edu.hu',
         changeOrigin: true
       },
       '/recipe': {
-        target: 'http://192.168.10.110:4000',
+        target: 'https://nodejs305.dszcbaross.edu.hu',
         changeOrigin: true
       },
       '/fav': {
-        target: 'http://192.168.10.110:4000',
+        target: 'https://nodejs305.dszcbaross.edu.hu',
         changeOrigin: true
       }
     }

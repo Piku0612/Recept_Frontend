@@ -12,20 +12,11 @@ import Favourites from './pages/Favourites'
 import Footer from './components/Footer'
 import AddRecipe from './pages/AddRecipe'
 import Admin from './pages/Admin'
-
-
-
-
-import Home from './pages/Home' // Home.jsx import
-
-
-
+import Home from './pages/Home'
 import { AuthProvider } from './context/AuthContext'
-
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-
     <AuthProvider>
       <BrowserRouter>
         <div className="d-flex flex-column min-vh-100">
@@ -42,7 +33,6 @@ createRoot(document.getElementById('root')).render(
               <Route path='/admin' element={<Admin />} />
             </Routes>
           </main>
-
 
           <Footer />
         </div>
