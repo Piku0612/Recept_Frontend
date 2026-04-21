@@ -80,13 +80,12 @@ export default function Home() {
       return;
     }
 
-<<<<<<< HEAD
-    const isFav = favourites.some((fav) => isSameRecipeId(fav.recipe_id, recipeId));
-=======
+
+
     const isFav = favourites.some((fav) =>
       isSameRecipeId(fav.recipe_id, recipeId)
     );
->>>>>>> 2cce4a4 (new version)
+
 
     if (isFav) {
       const data = await removeFavourite(recipeId);
@@ -99,8 +98,8 @@ export default function Home() {
       setFavourites((prev) =>
         prev.filter((fav) => !isSameRecipeId(fav.recipe_id, recipeId))
       );
-<<<<<<< HEAD
-=======
+
+
 
       setRecipes((prev) =>
         prev.map((recipe) =>
@@ -112,7 +111,7 @@ export default function Home() {
             : recipe
         )
       );
->>>>>>> 2cce4a4 (new version)
+
     } else {
       const data = await addFavourite(recipeId);
 
@@ -121,14 +120,13 @@ export default function Home() {
         return;
       }
 
-<<<<<<< HEAD
-      const recipeToAdd = recipes.find((r) => isSameRecipeId(r.recipe_id, recipeId));
-=======
+
+
       const recipeToAdd = recipes.find((r) =>
         isSameRecipeId(r.recipe_id, recipeId)
       );
 
->>>>>>> 2cce4a4 (new version)
+
       if (recipeToAdd) {
         setFavourites((prev) =>
           prev.some((fav) => isSameRecipeId(fav.recipe_id, recipeId))
@@ -176,7 +174,7 @@ export default function Home() {
               />
             ))
           )}
-<<<<<<< HEAD
+
 
           {recipes.map((r) => (
             <RecipeCard
@@ -186,8 +184,7 @@ export default function Home() {
               onToggleFavourite={handleToggleFavourite}
             />
           ))}
-=======
->>>>>>> 2cce4a4 (new version)
+
         </div>
       </div>
     </div>

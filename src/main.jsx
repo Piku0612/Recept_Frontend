@@ -12,36 +12,20 @@ import Favourites from './pages/Favourites'
 import Footer from './components/Footer'
 import AddRecipe from './pages/AddRecipe'
 import Admin from './pages/Admin'
-<<<<<<< HEAD
+
 
 
 
 import Home from './pages/Home' // Home.jsx import
 
-=======
-import Home from './pages/Home'
+
+
 import { AuthProvider } from './context/AuthContext'
->>>>>>> 2cce4a4 (new version)
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-<<<<<<< HEAD
-    <BrowserRouter>
-      <div className="d-flex flex-column min-vh-100">
-        <main className="flex-fill">
-          <Routes>
-            <Route path='/' element={<Navigate to='/home' />} />
-            <Route path='/home' element={<Home />} />
-            <Route path='/ownreceipts' element={<OwnReceipts />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/toplist' element={<TopList />} />
-            <Route path='/favourites' element={<Favourites />} />
-            <Route path='/add-recipe' element={<AddRecipe/>}/>
-            <Route path='/admin' element={<Admin/>}/>
-          </Routes>
-        </main>
-=======
+
     <AuthProvider>
       <BrowserRouter>
         <div className="d-flex flex-column min-vh-100">
@@ -58,7 +42,7 @@ createRoot(document.getElementById('root')).render(
               <Route path='/admin' element={<Admin />} />
             </Routes>
           </main>
->>>>>>> 2cce4a4 (new version)
+
 
           <Footer />
         </div>
