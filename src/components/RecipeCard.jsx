@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const BACKEND_URL = "http://192.168.10.110:4000";
+const BACKEND_URL = " https://nodejs305.dszcbaross.edu.hu";
 
 export default function RecipeCard({ recipe, isFavourite, onToggleFavourite }) {
   const navigate = useNavigate();
