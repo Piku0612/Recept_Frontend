@@ -1,18 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-const BACKEND_URL = " https://nodejs305.dszcbaross.edu.hu";
+import { getImageUrl } from "../api";
 
 export default function RecipeCard({ recipe, isFavourite, onToggleFavourite }) {
   const navigate = useNavigate();
 
   function openRecipe() {
-    navigate(`/recipe/list`);
+    navigate(`/recipe/${recipe.recipe_id}`);
   }
 
-  const imageSrc = recipe.image_url
-    ? `${BACKEND_URL}${recipe.image_url}`
-    : "https://via.placeholder.com/400x200";
+  const imageSrc = getImageUrl(recipe.image_url);
 
   return (
     <div className="col-md-4 mb-4">
@@ -28,35 +25,33 @@ export default function RecipeCard({ recipe, isFavourite, onToggleFavourite }) {
           <div className="d-flex align-items-center justify-content-between">
             <h5 className="card-title mb-0">{recipe.title}</h5>
 
-            <button
-              type="button"
-              onClick={() => onToggleFavourite(recipe.recipe_id)}
-              className="btn p-0 border-0 bg-transparent"
-              style={{ fontSize: "1.5rem" }}
-            >
-              <span
-                style={{
-                  color: isFavourite ? "red" : "#ccc",
-                  transition: "0.2s",
-                  cursor: "pointer",
-                }}
+            {onToggleFavourite && (
+              <button
+                type="button"
+                onClick={() => onToggleFavourite(recipe.recipe_id)}
+                className="btn p-0 border-0 bg-transparent"
+                style={{ fontSize: "1.5rem" }}
               >
-                ♥
-              </span>
-            </button>
+                <span
+                  style={{
+                    color: isFavourite ? "red" : "#ccc",
+                    transition: "0.2s",
+                    cursor: "pointer",
+                  }}
+                >
+                  ♥
+                </span>
+              </button>
+            )}
           </div>
 
-          <div className="mt-1 text-muted small d-flex align-items-center">
+          <div className="mt-1 text-muted small">
             <span style={{ color: "red", marginRight: "5px" }}>♥</span>
             <span>{recipe.szivekSzama || 0}</span>
           </div>
 
           <p className="card-text mt-2">
             {recipe.description?.slice(0, 120)}...
-          </p>
-
-          <p className="text-muted small">
-            <strong>Ingredients:</strong> {recipe.ingredients}
           </p>
 
           <button className="btn btn-warning mt-auto" onClick={openRecipe}>

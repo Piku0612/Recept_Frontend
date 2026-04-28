@@ -14,6 +14,7 @@ import AddRecipe from './pages/AddRecipe'
 import Admin from './pages/Admin'
 import Home from './pages/Home'
 import { AuthProvider } from './context/AuthContext'
+import RecipeDetails from './pages/RecipeDetails'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
             <Routes>
               <Route path='/' element={<Navigate to='/home' />} />
               <Route path='/home' element={<Home />} />
+              <Route path='/recipe/:id' element={<RecipeDetails />} />
               <Route path='/ownreceipts' element={<OwnReceipts />} />
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />

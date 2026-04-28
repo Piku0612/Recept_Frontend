@@ -198,3 +198,45 @@ export async function deleteUser(user_id) {
 
   return await res.json()
 }
+
+export function getImageUrl(imageUrl) {
+  if (!imageUrl) {
+    return "https://via.placeholder.com/900x500?text=No+Image";
+  }
+
+  const fixedPath = String(imageUrl).replaceAll("\\", "/");
+
+  if (fixedPath.startsWith("http")) {
+    return fixedPath;
+  }
+
+  return fixedPath;
+}
+
+export async function getRecipeById(recipeId) {
+  const recipes = await List();
+
+  if (recipes.error) {
+    return recipes;
+  }
+
+  const recipe = recipes.find((r) => String(r.recipe_id) === String(recipeId));
+
+  if (!recipe) {
+    return { error: "Recept nem található" };
+  }
+
+  return recipe;
+}
+
+export async function getTopRecipes() {
+  const recipes = await List();
+
+  if (recipes.error) {
+    return recipes;
+  }
+
+  return recipes.sort(
+    (a, b) => Number(b.szivekSzama || 0) - Number(a.szivekSzama || 0)
+  );
+}
