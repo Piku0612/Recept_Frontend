@@ -10,7 +10,6 @@ export default function AppNavbar({ user, onLogout }) {
   const nav = useNavigate()
   const [search, setSearch] = useState("")
 
-  // ✅ PROFIL STATE
   const [showModal, setShowModal] = useState(false)
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
@@ -21,36 +20,75 @@ export default function AppNavbar({ user, onLogout }) {
     nav(`/home?search=${search}`)
   }
 
-  function handleSave() {
+  // 🔥 PROFIL UPDATE
+  async function handleSave() {
+    if (!name.trim()) {
+      alert("A név nem lehet üres!")
+      return
+    }
+
+    if (!password.trim()) {
+      alert("A jelszó nem lehet üres!")
+      return
+    }
+
     if (password !== confirm) {
       alert("A jelszavak nem egyeznek!")
       return
     }
 
-    console.log("Új név:", name)
-    console.log("Új jelszó:", password)
+    try {
+      const res = await fetch("https://nodejs305.dszcbaross.edu.hu/users/edit", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          username: name,
+          email: user.email,
+          password: password
+        })
+      })
 
-    alert("Mentve!")
-    setShowModal(false)
+      const data = await res.json()
+
+      if (!res.ok) {
+        alert(data.error || "Hiba történt!")
+        return
+      }
+
+      alert("Profil frissítve!")
+      setShowModal(false)
+      setName("")
+      setPassword("")
+      setConfirm("")
+
+      // frissítés
+      window.location.reload()
+
+    } catch (err) {
+      console.log(err)
+      alert("Szerver hiba!")
+    }
   }
 
   return (
-
     <>
       {/* HEADER */}
       <div className="bg-white border-bottom py-3">
         <div className="container">
           <div className="row align-items-center g-3">
 
-            {/* Logo */}
-            <div className="col-12 col-md-3 text-center text-md-start">
+            {/* LOGO */}
+            <div className="col-12 col-md-4 text-center text-md-start">
               <h2 className="fw-bold m-0">
                 <span className="bg-dark text-white px-2">LH</span> LessHassle
               </h2>
             </div>
 
-            {/* Search */}
-            <div className="col-12 col-md-5">
+            {/* SEARCH */}
+            <div className="col-12 col-md-4">
               <div className="input-group">
                 <input
                   className="form-control"
@@ -67,26 +105,21 @@ export default function AppNavbar({ user, onLogout }) {
               </div>
             </div>
 
-            {isLoggedIn ? (
-              <>
-                {/* Admin */}
-                <div className="col-6 col-md-1 text-center text-md-end">
+            {/* RIGHT SIDE */}
+            <div className="col-12 col-md-4 d-flex flex-wrap gap-2 justify-content-center justify-content-md-end">
+
+              {isLoggedIn ? (
+                <>
                   {isAdmin && (
                     <NavLink to='/admin' className="btn btn-outline-dark">
                       Admin
                     </NavLink>
                   )}
-                </div>
 
-                {/* Logout */}
-                <div className="col-6 col-md-1 text-center text-md-end">
-                  <NavLink onClick={onLogout} className="btn btn-outline-dark">
+                  <button onClick={onLogout} className="btn btn-outline-dark">
                     Logout
-                  </NavLink>
-                </div>
+                  </button>
 
-                {/* ✅ PROFIL IKON */}
-                <div className="col-12 col-md-2 text-center text-md-end">
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                     alt="Profil"
@@ -96,26 +129,20 @@ export default function AppNavbar({ user, onLogout }) {
                     style={{ cursor: "pointer" }}
                     onClick={() => setShowModal(true)}
                   />
-                </div>
-
-              </>
-            ) : (
-              <>
-                {/* Register */}
-                <div className="col-6 col-md-1 text-center text-md-end">
+                </>
+              ) : (
+                <>
                   <NavLink to="/register" className="btn btn-outline-dark">
                     Register
                   </NavLink>
-                </div>
 
-                {/* Login */}
-                <div className="col-6 col-md-1 text-center text-md-end">
                   <NavLink to="/login" className="btn btn-outline-dark">
                     Login
                   </NavLink>
-                </div>
-              </>
-            )}
+                </>
+              )}
+
+            </div>
 
           </div>
         </div>
@@ -139,7 +166,7 @@ export default function AppNavbar({ user, onLogout }) {
         </div>
       </div>
 
-      {/* ✅ MODAL */}
+      {/* MODAL */}
       {showModal && (
         <div className="modal d-block" tabIndex="-1">
           <div className="modal-dialog">
@@ -151,6 +178,7 @@ export default function AppNavbar({ user, onLogout }) {
               </div>
 
               <div className="modal-body">
+
                 <div className="mb-3">
                   <label className="form-label">Új név</label>
                   <input
@@ -180,6 +208,7 @@ export default function AppNavbar({ user, onLogout }) {
                     onChange={(e) => setConfirm(e.target.value)}
                   />
                 </div>
+
               </div>
 
               <div className="modal-footer">
@@ -195,7 +224,6 @@ export default function AppNavbar({ user, onLogout }) {
           </div>
         </div>
       )}
-
     </>
   )
 }

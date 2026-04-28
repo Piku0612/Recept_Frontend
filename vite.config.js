@@ -22,6 +22,10 @@ export default defineConfig({
       '/fav': {
         target: 'https://nodejs305.dszcbaross.edu.hu',
         changeOrigin: true
+      },
+      '/uploads': {
+        target: 'https://nodejs305.dszcbaross.edu.hu',
+        changeOrigin: true
       }
     }
   }
