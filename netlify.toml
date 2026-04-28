@@ -3,32 +3,26 @@
   publish = "dist"
 
 [[redirects]]
-  from = "/api/*"
-  to = "https://nodejs305.dszcbaross.edu.hu/api/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "/users/*"
   to = "https://nodejs305.dszcbaross.edu.hu/users/:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/admin/*"
-  to = "https://nodejs305.dszcbaross.edu.hu/admin/:splat"
+  from = "/recipe/*"
+  to = "https://nodejs305.dszcbaross.edu.hu/recipe/:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/login"
-  to = "https://nodejs305.dszcbaross.edu.hu/login"
+  from = "/fav/*"
+  to = "https://nodejs305.dszcbaross.edu.hu/fav/:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/logout"
-  to = "https://nodejs305.dszcbaross.edu.hu/logout"
+  from = "/uploads/*"
+  to = "https://nodejs305.dszcbaross.edu.hu/uploads/:splat"
   status = 200
   force = true
 
