@@ -78,7 +78,7 @@ export async function List() {
     method: 'GET',
     credentials: 'include'
   })
-
+  console.log(res);
   if (!res.ok) {
     const data = await res.json()
     return { error: data?.error }
@@ -96,12 +96,12 @@ export async function searchRecipes(search) {
       credentials: 'include'
     }
   )
-
+  console.log(res);
   if (!res.ok) {
     const data = await res.json()
     return { error: data?.error }
   }
-
+  
   return await res.json()
 }
 
