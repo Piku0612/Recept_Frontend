@@ -1,18 +1,111 @@
-# React + Vite
+# 🍽️ LessHassle - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **LessHassle** egy receptes webalkalmazás frontend része, amely lehetővé teszi a felhasználók számára receptek böngészését, létrehozását és kedvencek kezelését.
 
-Currently, two official plugins are available:
+A frontend egy REST API backendhez kapcsolódik, és modern, reszponzív felületet biztosít.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+### Home
+<img width="1638" height="814" alt="image" src="https://github.com/user-attachments/assets/af2aecfd-0270-441a-a987-792d62a55453" />
 
-## React Compiler
+---
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### Add Recipe
+<img width="1688" height="814" alt="image" src="https://github.com/user-attachments/assets/30cbb679-aa5d-4ac5-98dc-42bafd376067" />
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+### Admin panel
+<img width="1698" height="815" alt="image" src="https://github.com/user-attachments/assets/91cb31f7-e4db-4440-90f0-c38810204efb" />
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+### Register
+<img width="1637" height="816" alt="image" src="https://github.com/user-attachments/assets/e611f959-3b41-43b0-bad1-a507303f6883" />
+
+---
+
+## 🚀 Funkciók
+
+- 🔐 Regisztráció és bejelentkezés
+- 📄 Receptek listázása
+- 🔍 Keresés receptek között
+- ❤️ Kedvencek kezelése (like)
+- 👤 Saját receptek megjelenítése
+- ➕ Új recept létrehozása
+- 🖼️ Kép feltöltés
+---
+
+## 🛠️ Technológiák
+
+- React
+- React Router
+- Bootstrap
+
+---
+### Mappa struktúra
+```markdown
++¦¦ NEZET/
++¦¦ dist
++¦¦ node_modules
++¦¦ public
++¦¦ src
+- +¦¦ assets
+- - L¦¦ react.svg
+- +¦¦ components
+- - +¦¦ AddRecipeCard.jsx
+- - +¦¦ AppNavbar.jsx
+- - +¦¦ Button.jsx
+- - +¦¦ Footer.jsx
+- - +¦¦ Input.jsx
+- - +¦¦ RecipeCard.jsx
+- - L¦¦ Table.jsx
+- -
+- +¦¦ context
+- - L¦¦ AuthContext.jsx
+- -
+- +¦¦ pages
+- - +¦¦ AddRecipe.jsx
+- - +¦¦ Admin.jsx
+- - +¦¦ Favourites.jsx
+- - +¦¦ Home.jsx
+- - +¦¦ Login.jsx
+- - +¦¦ OwnReceipts.jsx
+- - +¦¦ Register.jsx
+- - L¦¦ TopList.jsx
+- -
+- +¦¦ api.js
+- L¦¦ main.jsx
+-
++¦¦ .gitignore
++¦¦ eslint.config.js
++¦¦ index.html
++¦¦ netlify.toml
++¦¦ package-lock.json
++¦¦ package.json
++¦¦ README.md
+L¦¦ vite.config.js  
+```
+
+## 📦 Használt package-ek
+
+```json
+{
+  "bootstrap": "^5.3.8",
+  "react": "^19.2.4",
+  "react-dom": "^19.2.4",
+  "react-router-dom": "^7.13.0"
+}
+```
+
+## Használt forrás
+- VS code
+- NPM
+- W3Schools
+- ChatGPT
+- GitHub
+- Google Drive
+- PhpMyAdmin
+- React+vite
+## 👨‍💻 Készítette
+### Kocsis Róbert
